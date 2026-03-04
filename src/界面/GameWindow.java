@@ -63,30 +63,24 @@ public class GameWindow extends JFrame implements KeyListener, ActionListener {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        if (isGameOver) {
-            g.setColor(Color.red);
-            g.setFont(new Font("黑体",Font.BOLD,35));
-            g.drawString("你把自己创思了",Blook_Size*Width/2,Blook_Size*Height/2);
-        }//进行游戏结束处理
-        if(Count==5) {
-            g.setColor(Color.white);
-            g.setFont(new Font("黑体",Font.BOLD,35));
-            g.drawString("恭喜通过，地图已无空位",Blook_Size*Width,Blook_Size*Height);
-        }//胜利结束
+
         g.setColor(Color.black);
         g.fillRect(0,0,Width,Height);
 
         g.setColor(Color.green);
         for(int i=1;i<Height;i++) {
-            g.setFont(new Font( "黑体",Font.BOLD,10));
-            g.drawString("#",Blook_Size,i*Blook_Size);
+            g.setFont(new Font( "黑体",Font.BOLD,20));
+            g.drawString("#",0,i*Blook_Size);
             g.drawString("#",30*Blook_Size,i*Blook_Size);
         }
         for(int i=1;i<Width;i++) {
-            g.setFont(new Font( "黑体",Font.BOLD,10));
-            g.drawString("#",i*Blook_Size,Blook_Size);
-            g.drawString("#",i*Blook_Size,20*Blook_Size);
+            g.setFont(new Font( "黑体",Font.BOLD,20));
+            g.drawString("#",i*Blook_Size,0);
+            g.drawString("#",i*Blook_Size,21*Blook_Size);
         }
+
+        g.setColor(Color.white);
+        g.drawString("Score"+Score,400,50);
 
 
         g.setColor(Color.yellow);
@@ -100,6 +94,20 @@ public class GameWindow extends JFrame implements KeyListener, ActionListener {
 
         g.setColor(Color.red);
         g.fillRect(food.x*Blook_Size,food.y*Blook_Size,Blook_Size,Blook_Size);
+
+        if (isGameOver) {
+            g.setColor(Color.red);
+            g.setFont(new Font("黑体",Font.BOLD,35));
+            g.drawString("你把自己创思了",200,200);
+            return;
+        }//进行游戏结束处理
+        if(Count==5) {
+            g.setColor(Color.white);
+            g.setFont(new Font("黑体",Font.BOLD,35));
+            g.drawString("恭喜通过，地图已无空位",200,200);
+            timer.stop();
+            return;
+        }//胜利结束
     }
 
     private void  generateFood(){
